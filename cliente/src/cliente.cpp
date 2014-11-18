@@ -9,7 +9,12 @@
 #include <iostream>
 using namespace std;
 
+#include "InterfazCliente.h"
+#include "Constantes.h"
+
 int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-	return 0;
+	cout<<START_MESSAJE<<endl;
+	InterfazCliente inter;
+	while(inter.procesarEntrada());
+	cout<<END_MESSAJE<<endl;
 }

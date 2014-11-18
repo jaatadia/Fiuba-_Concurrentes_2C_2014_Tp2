@@ -7,9 +7,28 @@
 //============================================================================
 
 #include <iostream>
+#include <unistd.h>
 using namespace std;
 
-int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-	return 0;
+#include "Constantes.h"
+#include "ComunicadorServer.h"
+
+
+static const char* PATH_DB = "./base.db";
+int main(int argc,char argv[]) {
+
+	cout<<START_MESSAJE<<endl;
+
+	bool child = false;
+	ComunicadorServer comunicador(PATH_DB);
+	while(!child && comunicador.esperarRequest()){
+		int pid = fork();//todo verificar error
+		if(pid==0){
+			child = true;
+			comunicador.procesarRequest();
+			comunicador.enviarRespuesta();
+		}
+	}
+
+	if(!child) cout<<END_MESSAJE<<endl;
 }
