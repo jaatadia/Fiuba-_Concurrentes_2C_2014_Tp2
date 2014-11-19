@@ -7,7 +7,7 @@
 
 #include "ComunicadorServer.h"
 
-ComunicadorServer::ComunicadorServer(std::string path):base(path) {
+ComunicadorServer::ComunicadorServer(std::string path):base(path), contentRequest("","","") {
 	// TODO Auto-generated constructor stub
 
 }

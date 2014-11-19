@@ -10,6 +10,10 @@
 
 #include <string>
 
+static const int LENGTH_NOMBRE=61;
+static const int LENGTH_DIRECCION=120;
+static const int LENGTH_TELEFONO=13;
+
 class Registro {
 public:
 	Registro();
@@ -18,10 +22,13 @@ public:
 	std::string getNombre();
 	std::string getDireccion();
 	std::string getTelefono();
+	void getNombre(char nombre[LENGTH_NOMBRE]);
+	void getDireccion(char direccion[LENGTH_DIRECCION]);
+	void getTelefono(char telefono[LENGTH_TELEFONO]);
 private:
-	char nombre[61];
-	char direccion[120];
-	char telefono[13];
+	std::string nombre;
+	std::string direccion;
+	std::string telefono;
 };
 
 #endif /* REGISTRO_H_ */

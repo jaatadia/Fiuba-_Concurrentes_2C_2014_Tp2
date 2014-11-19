@@ -7,12 +7,8 @@
 
 #include "Registro.h"
 
-Registro::Registro(std::string nombre,std::string direccion,std::string telefono) {
-	// TODO Auto-generated constructor stub
+Registro::Registro(std::string nombre,std::string direccion,std::string telefono): nombre(nombre), direccion(direccion), telefono(telefono) {
 
-}
-
-Registro::Registro():Registro("","",""){
 }
 
 Registro::~Registro() {
@@ -20,16 +16,35 @@ Registro::~Registro() {
 }
 
 std::string Registro::getNombre(){
-	//todo
-	return "";
+	return this->nombre;
 }
 
 std::string Registro::getDireccion(){
-	//todo
-	return "";
+	return this->direccion;
 }
 
 std::string Registro::getTelefono(){
-	//todo
-	return "";
+	return this->telefono;
+}
+
+void copyString(std::string myString,char* cadena,int longitud){
+	unsigned int i=0;
+	while (i<longitud && i<myString.size()){
+		cadena[i]=myString[i];
+		i++;
+	}
+	if (i<longitud) cadena[i]='\0';
+}
+
+
+void Registro::getNombre(char nom[LENGTH_NOMBRE]){
+	copyString(nombre,nom,LENGTH_NOMBRE);
+}
+
+void Registro::getDireccion(char dir[LENGTH_DIRECCION]){
+	copyString(direccion,dir,LENGTH_DIRECCION);
+}
+
+void Registro::getTelefono(char tel[LENGTH_TELEFONO]){
+	copyString(telefono,tel,LENGTH_TELEFONO);
 }
