@@ -12,9 +12,6 @@ Registro::Registro(std::string nombre,std::string direccion,std::string telefono
 
 }
 
-Registro::Registro():Registro("","",""){
-}
-
 Registro::~Registro() {
 	// TODO Auto-generated destructor stub
 }

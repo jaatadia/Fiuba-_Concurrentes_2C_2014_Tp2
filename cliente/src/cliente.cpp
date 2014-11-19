@@ -13,8 +13,8 @@ using namespace std;
 #include "Constantes.h"
 
 int main() {
-	cout<<START_MESSAJE<<endl;
+	cout<<START_MESSAGE<<endl;
 	InterfazCliente inter;
 	while(inter.procesarEntrada());
-	cout<<END_MESSAJE<<endl;
+	cout<<END_MESSAGE<<endl;
 }
