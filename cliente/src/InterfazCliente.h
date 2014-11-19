@@ -15,6 +15,7 @@
 using namespace std;
 
 #include "ComunicadorCliente.h"
+#include "Registro.h"
 #include "Constantes.h"
 
 class InterfazCliente {

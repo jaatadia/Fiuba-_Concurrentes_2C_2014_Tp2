@@ -18,6 +18,45 @@ InterfazCliente::~InterfazCliente() {
 	// TODO Auto-generated destructor stub
 }
 
+
+Registro getRecord(vector<string> vec,bool &valid, bool &nombre,bool &direccion, bool &telefono){
+	string nom;	string tel;	string dir;
+	valid=true;
+	nombre=direccion=telefono=false;
+
+	unsigned int i=1;
+	while (valid && i<vec.size()){
+
+		bool parametroValido=((vec[i]==NAME_INPUT)||(vec[i]==ADR_INPUT)||(vec[i]==TEL_INPUT));
+		bool proximoValido=((i+1<vec.size()) && (vec[i+1]!=NAME_INPUT) && (vec[i+1]!=ADR_INPUT) && (vec[i+1]!=TEL_INPUT));
+
+		if(parametroValido){
+			if (proximoValido){
+				if(vec[i]==NAME_INPUT){
+					nom = vec[i+1];
+					nombre=true;
+				}else if(vec[i]==ADR_INPUT){
+					dir = vec[i+1];
+					direccion=true;
+				}else if(vec[i]==TEL_INPUT){
+					tel = vec[i+1];
+					telefono=true;
+				}
+			}else{
+				cout<<MISSING_ARGUMENT_MESSAGE<<vec[i]<<endl;
+				valid=false;
+			}
+		}else{
+			cout<<INVALID_PARAMETER_MESSAGE<<vec[i]<<endl;
+			valid=false;
+		}
+		i+=2;
+	}
+
+	return Registro(nom,dir,tel);
+}
+
+
 bool InterfazCliente::commandNotFound(vector<string> vec){
 	cout<<INVALID_COMMAND_MESSAGE<<vec[0]<<endl;
 	return true;
@@ -34,7 +73,16 @@ bool InterfazCliente::add(vector<string> vec){
 }
 
 bool InterfazCliente::query(vector<string> vec){
-	//todo
+	bool valid,nombre,dir,tel;
+	Registro rec = getRecord(vec,valid,nombre,dir,tel);
+	if(valid&&(nombre||dir||tel)){
+		char nombre[61];rec.getNombre(nombre);
+		char direccion[120];rec.getDireccion(direccion);
+		char telefono[13];rec.getTelefono(telefono);
+		cout<<"Registro:"<<nombre<<" "<<direccion<<" "<<telefono<<endl;
+	}else{
+		cout<<INVALID_QUERY<<endl;
+	}
 	return true;
 }
 
