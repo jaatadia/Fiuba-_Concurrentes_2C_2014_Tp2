@@ -23,6 +23,7 @@ public:
 	InterfazCliente();
 	virtual ~InterfazCliente();
 	bool procesarEntrada();
+
 private:
 
 	string getEntrada();
@@ -34,9 +35,12 @@ private:
 	bool exit(vector<string> vec);
 	bool add(vector<string> vec);
 	bool query(vector<string> vec);
+	bool help(vector<string> vec);
 
 	ComunicadorCliente comunicador;
 	bool continueInput;
 };
+
+
 
 #endif /* INTERFAZCLIENTE_H_ */

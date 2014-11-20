@@ -6,6 +6,8 @@
  */
 #include "InterfazCliente.h"
 
+
+
 /* **********************************************************************
  *				funciones internas
  ***********************************************************************/
@@ -73,24 +75,25 @@ vector<string> parse(string cadena,char delim1, char delim2){
 /* ----------------------------------------------------------------------------*/
 
 
-
-
-
-
-
 InterfazCliente::InterfazCliente(): continueInput(true) {
 	comandos[DEFAULT_COMMAND] = &InterfazCliente::commandNotFound;
 	comandos[EXIT_COMMAND] = &InterfazCliente::exit;
 	comandos[ADD_COMMAND] = &InterfazCliente::add;
 	comandos[QUERY_COMMAND] = &InterfazCliente::query;
+	comandos[HELP_COMMAND] = &InterfazCliente::help;
 }
 
 InterfazCliente::~InterfazCliente() {
-	// TODO Auto-generated destructor stub
 }
 
 bool InterfazCliente::commandNotFound(vector<string> vec){
 	cout<<INVALID_COMMAND_MESSAGE<<vec[0]<<endl;
+	cout<<INVALID_COMMAND_HELP_MESSAGE<<endl;
+	return true;
+}
+
+bool InterfazCliente::help(vector<string> vec){
+	cout<<HELP_MESSAGE<<endl;
 	return true;
 }
 
@@ -136,8 +139,6 @@ string InterfazCliente::InterfazCliente::getEntrada(){
 	}
 	return entrada;
 }
-
-
 
 bool InterfazCliente::procesarComando(vector<string> vec){
 	if (vec.size()==0) return true;

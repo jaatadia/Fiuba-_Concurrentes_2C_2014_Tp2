@@ -6,15 +6,27 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
+#include <stdio.h>
 #include <iostream>
+#include "signal.h"
 using namespace std;
 
 #include "InterfazCliente.h"
 #include "Constantes.h"
 
+
+
+void endInput(int signal){
+	fclose(stdin);
+}
+
+
 int main() {
-	cout<<START_MESSAGE<<endl;
+
+	signal(SIGINT,endInput);
+
 	InterfazCliente inter;
+	cout<<START_MESSAGE<<endl;
 	while(inter.procesarEntrada());
 	cout<<END_MESSAGE<<endl;
 }
