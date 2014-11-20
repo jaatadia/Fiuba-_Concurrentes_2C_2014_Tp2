@@ -26,9 +26,7 @@ public:
 private:
 
 	string getEntrada();
-	vector<string> parse(string cadena,char delim1, char delim2);
 	bool procesarComando(vector<string> vec);
-
 
 	typedef bool (InterfazCliente::*func_t)(vector<string>);
 	map<const string,func_t> comandos;

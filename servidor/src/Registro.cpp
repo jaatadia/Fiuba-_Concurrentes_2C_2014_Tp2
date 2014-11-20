@@ -12,7 +12,6 @@ Registro::Registro(std::string nombre,std::string direccion,std::string telefono
 }
 
 Registro::~Registro() {
-	// TODO Auto-generated destructor stub
 }
 
 std::string Registro::getNombre(){
@@ -47,4 +46,8 @@ void Registro::getDireccion(char dir[LENGTH_DIRECCION]){
 
 void Registro::getTelefono(char tel[LENGTH_TELEFONO]){
 	copyString(telefono,tel,LENGTH_TELEFONO);
+}
+
+std::string Registro::toString(){
+	return PRESENTADOR+PRESENTADOR_NOMBRE+nombre+PRESENTADOR_DIRECCION+direccion+PRESENTADOR_TELEFONO+telefono;
 }

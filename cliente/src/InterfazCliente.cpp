@@ -4,20 +4,11 @@
  *  Created on: Nov 18, 2014
  *      Author: javier
  */
-
 #include "InterfazCliente.h"
 
-InterfazCliente::InterfazCliente(): continueInput(true) {
-	comandos[DEFAULT_COMMAND] = &InterfazCliente::commandNotFound;
-	comandos[EXIT_COMMAND] = &InterfazCliente::exit;
-	comandos[ADD_COMMAND] = &InterfazCliente::add;
-	comandos[QUERY_COMMAND] = &InterfazCliente::query;
-}
-
-InterfazCliente::~InterfazCliente() {
-	// TODO Auto-generated destructor stub
-}
-
+/* **********************************************************************
+ *				funciones internas
+ ***********************************************************************/
 
 Registro getRecord(vector<string> vec,bool &valid, bool &nombre,bool &direccion, bool &telefono){
 	string nom;	string tel;	string dir;
@@ -57,46 +48,7 @@ Registro getRecord(vector<string> vec,bool &valid, bool &nombre,bool &direccion,
 }
 
 
-bool InterfazCliente::commandNotFound(vector<string> vec){
-	cout<<INVALID_COMMAND_MESSAGE<<vec[0]<<endl;
-	return true;
-}
-
-bool InterfazCliente::exit(vector<string> vec){
-	continueInput=false;
-	return false;
-}
-
-bool InterfazCliente::add(vector<string> vec){
-	//todo
-	return true;
-}
-
-bool InterfazCliente::query(vector<string> vec){
-	bool valid,nombre,dir,tel;
-	Registro rec = getRecord(vec,valid,nombre,dir,tel);
-	if(valid&&(nombre||dir||tel)){
-		char nombre[61];rec.getNombre(nombre);
-		char direccion[120];rec.getDireccion(direccion);
-		char telefono[13];rec.getTelefono(telefono);
-		cout<<"Registro:"<<nombre<<" "<<direccion<<" "<<telefono<<endl;
-	}else{
-		cout<<INVALID_QUERY<<endl;
-	}
-	return true;
-}
-
-string InterfazCliente::InterfazCliente::getEntrada(){
-	string entrada="";
-	if(!cin.eof())cout<<INPUT_MESSAGE;getline(cin,entrada);
-	if(cin.eof()) {
-		continueInput=false;
-		entrada="";
-	}
-	return entrada;
-}
-
-vector<string> InterfazCliente::parse(string cadena,char delim1, char delim2){
+vector<string> parse(string cadena,char delim1, char delim2){
 	vector<string> parsed;
 	string item="";
 	char delim;
@@ -116,6 +68,74 @@ vector<string> InterfazCliente::parse(string cadena,char delim1, char delim2){
 	}
 	return parsed;
 }
+
+
+/* ----------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+InterfazCliente::InterfazCliente(): continueInput(true) {
+	comandos[DEFAULT_COMMAND] = &InterfazCliente::commandNotFound;
+	comandos[EXIT_COMMAND] = &InterfazCliente::exit;
+	comandos[ADD_COMMAND] = &InterfazCliente::add;
+	comandos[QUERY_COMMAND] = &InterfazCliente::query;
+}
+
+InterfazCliente::~InterfazCliente() {
+	// TODO Auto-generated destructor stub
+}
+
+bool InterfazCliente::commandNotFound(vector<string> vec){
+	cout<<INVALID_COMMAND_MESSAGE<<vec[0]<<endl;
+	return true;
+}
+
+bool InterfazCliente::exit(vector<string> vec){
+	continueInput=false;
+	return false;
+}
+
+bool InterfazCliente::add(vector<string> vec){
+	bool valid,nombre,dir,tel;
+	Registro rec = getRecord(vec,valid,nombre,dir,tel);
+	if(valid&&(nombre&&dir&&tel)){
+		Registro recResult = comunicador.enviarAlta(rec);
+		cout<<ALTA_REGISTRO_MESSAGE<<recResult.toString()<<endl;
+	}
+	return true;
+}
+
+bool InterfazCliente::query(vector<string> vec){
+	bool valid,nombre,dir,tel;
+	Registro rec = getRecord(vec,valid,nombre,dir,tel);
+	if(valid&&(nombre||dir||tel)){
+		list<Registro> resultado = comunicador.enviarQuery(rec);
+		list<Registro>::iterator it;
+		cout<<RESULTADO_QUERY_MESSAGE<<endl;
+		for (it = resultado.begin();it!=resultado.end();it++){
+			cout<<(*it).toString()<<endl;
+		}
+	}else{
+		cout<<INVALID_QUERY_MESSAGE<<endl;
+	}
+	return true;
+}
+
+string InterfazCliente::InterfazCliente::getEntrada(){
+	string entrada="";
+	if(!cin.eof())cout<<INPUT_MESSAGE;getline(cin,entrada);
+	if(cin.eof()) {
+		continueInput=false;
+		entrada="";
+	}
+	return entrada;
+}
+
+
 
 bool InterfazCliente::procesarComando(vector<string> vec){
 	if (vec.size()==0) return true;
