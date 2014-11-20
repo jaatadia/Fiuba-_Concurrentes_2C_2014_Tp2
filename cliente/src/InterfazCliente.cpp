@@ -104,7 +104,9 @@ bool InterfazCliente::add(vector<string> vec){
 	Registro rec = getRecord(vec,valid,nombre,dir,tel);
 	if(valid&&(nombre&&dir&&tel)){
 		Registro recResult = comunicador.enviarAlta(rec);
-		cout<<ALTA_REGISTRO_MESSAGE<<recResult.toString()<<endl;
+		cout<<RESULT_ADD_MESSAGE<<recResult.toString()<<endl;
+	}else{
+		cout<<INVALID_ADD_MESSAGE<<endl;
 	}
 	return true;
 }
@@ -115,7 +117,7 @@ bool InterfazCliente::query(vector<string> vec){
 	if(valid&&(nombre||dir||tel)){
 		list<Registro> resultado = comunicador.enviarQuery(rec);
 		list<Registro>::iterator it;
-		cout<<RESULTADO_QUERY_MESSAGE<<endl;
+		cout<<RESULT_QUERY_MESSAGE<<endl;
 		for (it = resultado.begin();it!=resultado.end();it++){
 			cout<<(*it).toString()<<endl;
 		}
