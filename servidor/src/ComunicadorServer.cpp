@@ -7,13 +7,16 @@
 
 #include "ComunicadorServer.h"
 
-ComunicadorServer::ComunicadorServer(std::string path):base(path), contentRequest("","","") {
-	// TODO Auto-generated constructor stub
+ComunicadorServer::ComunicadorServer(std::string path):base(path), contentRequest("","",""), respuestaRequest(), tipoRequest(0){
+	// TODO !! está bien generado respuestaRequest y tipoRequest? para el server padre no influye, o si?
+	this->cola = new Cola<request>("/tmp/keyfile_cola.txt",'a');
 
 }
 
 ComunicadorServer::~ComunicadorServer() {
-	// TODO Auto-generated destructor stub
+	//TODO !!! si es hijo no destruye la cola, no? como lo se entonces?
+	//this->cola->destruir();
+	delete this->cola;
 }
 
 bool ComunicadorServer::esperarRequest(){

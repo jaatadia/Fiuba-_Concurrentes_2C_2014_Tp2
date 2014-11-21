@@ -5,21 +5,20 @@
  *      Author: florencia
  */
 
-#ifndef MENSAJES_H_
-#define MENSAJES_H_
+#ifndef REQUEST_H_
+#define REQUEST_H_
 
-#define	PETICION	1
-#define	RESPUESTA	2
-#define TEXTO_SIZE	255
-
-
-typedef struct mensaje {
+typedef struct request {
 	long mtype;
-	int id;
-	char texto[TEXTO_SIZE];
-} mensaje;
-//TODO !!
+	long senderPid;
+	short tipoRequest;
+	char nombre[61]; //TODO ! esto lo dejo así o lo pongo en constantes? o como define acá arriba?
+	char direccion[120];
+	char telefono[13];
+} request;
 
-#endif /* MENSAJES_H_ */
+#endif /* REQUEST_H_ */
+
+//TODO !!! copiar este archivo y Cola.h al src del proyecto servidor (cuando esté chequeado y ande)
 
 

@@ -8,12 +8,12 @@
 #include "ComunicadorCliente.h"
 
 ComunicadorCliente::ComunicadorCliente() {
-	// TODO Auto-generated constructor stub
-
+	this->cola = new Cola<request>("/tmp/keyfile_cola.txt",'a');
 }
 
 ComunicadorCliente::~ComunicadorCliente() {
-	// TODO Auto-generated destructor stub
+	//TODO !! el cliente no destruye la cola, no?
+	delete this->cola;
 }
 
 std::list<Registro> ComunicadorCliente::enviarQuery(Registro reg){

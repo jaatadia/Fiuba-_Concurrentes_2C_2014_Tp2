@@ -12,20 +12,13 @@
 #include <string>
 #include "Registro.h"
 #include "BaseDatos.h"
+#include "Cola.h"
 
 
 class ComunicadorServer {
-public:
-	ComunicadorServer(std::string pathBaseDatos);
-	virtual ~ComunicadorServer();
-	bool esperarRequest();
-	void procesarRequest();
-	void enviarRespuesta();
-
 private:
 	void procesarQuery();
 	void procesarAlta();
-
 
 	BaseDatos base;
 	static const int R_QUERY = 0;
@@ -33,6 +26,14 @@ private:
 	int tipoRequest;
 	Registro contentRequest;
 	std::list<Registro> respuestaRequest;
+	Cola<request>* cola;
+
+public:
+	ComunicadorServer(std::string pathBaseDatos);
+	virtual ~ComunicadorServer();
+	bool esperarRequest();
+	void procesarRequest();
+	void enviarRespuesta();
 };
 
 #endif /* COMUNICADORSERVER_H_ */
