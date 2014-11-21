@@ -18,6 +18,9 @@ ComunicadorCliente::~ComunicadorCliente() {
 
 std::list<Registro> ComunicadorCliente::enviarQuery(Registro reg){
 	//todo
+	reg.getNombre();
+	reg.getDireccion();
+	reg.getTelefono();
 }
 
 Registro ComunicadorCliente::enviarAlta(Registro){

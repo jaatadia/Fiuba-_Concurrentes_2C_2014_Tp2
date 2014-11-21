@@ -24,9 +24,12 @@ private:
 	static const int R_QUERY = 0;
 	static const int R_ALTA = 1;
 	int tipoRequest;
-	Registro contentRequest;
-	std::list<Registro> respuestaRequest;
+	Registro contentRequest; //TODO !!!! no se que es esto
+	std::list<Registro> respuestaRequest;  //TODO !!!! no se que es esto
 	Cola<request>* cola;
+
+	request reqRecibido;
+	request reqRespuesta;
 
 public:
 	ComunicadorServer(std::string pathBaseDatos);
