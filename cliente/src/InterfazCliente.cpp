@@ -106,8 +106,12 @@ bool InterfazCliente::add(vector<string> vec){
 	bool valid,nombre,dir,tel;
 	Registro rec = getRecord(vec,valid,nombre,dir,tel);
 	if(valid&&(nombre&&dir&&tel)){
-		Registro recResult = comunicador.enviarAlta(rec);
-		cout<<RESULT_ADD_MESSAGE<<recResult.toString()<<endl;
+		bool resultado = comunicador.enviarAlta(rec);
+		if (resultado) {
+			cout<<RESULT_ADD_MESSAGE<<rec.toString()<<endl;
+		} else {
+			//TODO
+		}
 	}else{
 		cout<<INVALID_ADD_MESSAGE<<endl;
 	}

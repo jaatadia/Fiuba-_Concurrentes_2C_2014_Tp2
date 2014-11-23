@@ -1,10 +1,9 @@
 /*
  * Cola.h
  *
- *  Created on: Nov 21, 2014
- *      Author: ubuntu_user
+ *  Created on: Nov 23, 2014
+ *      Author: florencia
  */
-
 #ifndef COLA_H_
 #define COLA_H_
 
@@ -30,6 +29,8 @@ template <class T> class Cola {
 		int leer(const int tipo,T* buffer) const; //devuelve cant de bytes copiados en el buffer, o -1 en error (y tira el msj como excepción)
 		int destruir() const; //devuelve 0 en exito, -1 en error (y tira el msj como excepción) - clientes NO deberían destruirla
 };
+
+//TODO !!!! revisar lo copiado!
 
 template <class T> Cola<T>::Cola(const string& archivo,const char letra) {
 	//si no existe el archivo temporal es porque no se inicio el servidor

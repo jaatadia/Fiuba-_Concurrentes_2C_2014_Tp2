@@ -45,7 +45,7 @@ static const std::string HELP_MESSAGE = INTEGRANTES_MESSAGE+"Los comandos posibl
 		"\t"+ADD_COMMAND+": Para dar de alta un registro, lleva los parametros: "+NAME_INPUT+" "+ADR_INPUT+" "+TEL_INPUT+"\n"+
 		"\t"+EXIT_COMMAND+" o ctrl-D: Para terminal el programa";
 
-
+static const int A_SERVIDOR = 0;
 
 
 

@@ -1,9 +1,11 @@
 /*
  * request.h
  *
- *  Created on: Nov 20, 2014
+ *  Created on: Nov 23, 2014
  *      Author: florencia
  */
+
+//TODO !!!! revisar lo copiado
 
 #ifndef REQUEST_H_
 #define REQUEST_H_
@@ -18,7 +20,4 @@ typedef struct request {
 } request;
 
 #endif /* REQUEST_H_ */
-
-//TODO !!! revisar lo copiado - cada cambio acá, hacerlo en el otro
-
 

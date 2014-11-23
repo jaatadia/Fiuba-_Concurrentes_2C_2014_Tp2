@@ -13,6 +13,7 @@
 #include "Registro.h"
 #include "BaseDatos.h"
 #include "Cola.h"
+#include "request.h"
 
 
 class ComunicadorServer {
@@ -23,13 +24,11 @@ private:
 	BaseDatos base;
 	static const int R_QUERY = 0;
 	static const int R_ALTA = 1;
-	int tipoRequest;
-	Registro contentRequest; //TODO !!!! no se que es esto
-	std::list<Registro> respuestaRequest;  //TODO !!!! no se que es esto
-	Cola<request>* cola;
 
-	request reqRecibido;
-	request reqRespuesta;
+	int tipoRequest;
+	Registro contentRequest; //request recibido para procesar. en forma de Registro
+	std::list<Registro> respuestaRequest;  //lista con los registros obtenidos de una query
+	Cola<request> cola;
 
 public:
 	ComunicadorServer(std::string pathBaseDatos);
