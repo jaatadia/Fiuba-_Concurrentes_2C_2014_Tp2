@@ -30,6 +30,9 @@ int main(int argc,char argv[]) {
 		}
 	}
 
-	if(!child) cout<<END_MESSAJE<<endl;
+	if(!child){
+		comunicador.cerrar();
+		cout<<END_MESSAJE<<endl;
+	}
 	//TODO ! y el return?
 }

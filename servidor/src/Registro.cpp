@@ -11,6 +11,10 @@ Registro::Registro(std::string nombre,std::string direccion,std::string telefono
 
 }
 
+Registro::Registro(): nombre(""), direccion(""), telefono("") {
+
+}
+
 Registro::~Registro() {
 }
 

@@ -16,11 +16,11 @@ BaseDatos::~BaseDatos() {
 	// TODO Auto-generated destructor stub
 }
 
-std::list<Registro> query(Registro reg){
+std::list<Registro> BaseDatos::query(Registro reg){
 	//todo
 }
 
-bool altaRegistro(Registro reg){
+bool BaseDatos::altaRegistro(Registro reg){
 	//todo
 	return false;
 }
