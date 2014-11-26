@@ -11,15 +11,21 @@
 #include <list>
 #include <string>
 #include "Registro.h"
+#include "archivos/Maestro.h"
 
-
+/**
+ * Encapsula el funcionamiento concurrente de los archivos.
+ */
 class BaseDatos {
+private:
+	Maestro datos;
+
 public:
 	BaseDatos(std::string path);
 	virtual ~BaseDatos();
 
-	std::list<Registro> query(Registro reg);
-	bool altaRegistro(Registro reg);
+	std::list<Registro> query(Registro & reg);
+	bool altaRegistro(Registro & reg);
 };
 
 #endif /* BASEDATOS_H_ */

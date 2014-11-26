@@ -12,7 +12,7 @@
 class ArchivoInt: public Archivo {
 public:
 	ArchivoInt(const string & path);
-	int leer(int position);
+//	int leer(int position);
 	int leer();
 	int escribir(const int);
 	virtual ~ArchivoInt();

@@ -13,22 +13,25 @@
 #include <errno.h>
 #include <unistd.h>
 #include <string.h>
-
+#include <stdio.h>
+#include <fstream>
 using namespace std;
 
 Archivo::Archivo(const string& path) :
 		path(path), eof_val(false) {
-	if(!exists_test(path)){
-		fstream stream2;
-		stream2.open(path.c_str(), std::ios::out);
-		stream2.close();
+//	if(!exists_test(path)){
+//		fstream stream2;
+//		stream2.open(path.c_str(), std::ios::out);
+//		stream2.close();
+//	}
+	file = fopen(path.c_str(),"ab+");
+	if(file == NULL ){
+		throw ArchivoException("No pudo abrirse el archivo "+ path, strerror(errno));
 	}
-	fstream::openmode mode = fstream::in | std::ios::out | ios::binary;
-	stream.open(path.c_str(), mode);
 }
 
 Archivo::~Archivo() {
-	stream.close();
+	fclose(file);
 }
 
 
@@ -43,14 +46,11 @@ bool Archivo::exists_test (const std::string& name) {
     }
 }
 
-void Archivo::close() {
-	stream.close();
-}
-
 bool Archivo::eof() {
 	return eof_val;
 }
 
 void Archivo::start() {
-	stream.seekg(0);
+	eof_val = false;
+	fseek(file,0,SEEK_SET);
 }

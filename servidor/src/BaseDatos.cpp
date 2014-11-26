@@ -6,8 +6,8 @@
  */
 
 #include "BaseDatos.h"
-
-BaseDatos::BaseDatos(std::string path) {
+#include "excepciones/Exception.h"
+BaseDatos::BaseDatos(std::string path): datos(path) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -16,12 +16,16 @@ BaseDatos::~BaseDatos() {
 	// TODO Auto-generated destructor stub
 }
 
-std::list<Registro> BaseDatos::query(Registro reg){
-	//todo
+std::list<Registro> BaseDatos::query(Registro & reg){
+	return datos.query(reg);
 }
 
-bool BaseDatos::altaRegistro(Registro reg){
-	//todo
-	return false;
+bool BaseDatos::altaRegistro(Registro & reg){
+	try {
+		datos.guardar(reg);
+		return true;
+	} catch (Exception & e){
+		return false;
+	}
 }
 

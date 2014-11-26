@@ -9,22 +9,20 @@
 #define ARCHIVO_H_
 #include <string>
 using namespace std;
-#include <fstream>   // file I/O
+#include <stdio.h>   // file I/O
 /**
  * Encapsulamiento de los formatos de escritura/lectura en archivo..
  */
 
 class Archivo {
 protected:
-	fstream stream;
-	int fd;
+	FILE * file;
 	string path;
 	bool eof_val;
 public:
 	Archivo(const string&);
 	virtual ~Archivo();
 	bool exists_test (const std::string& name);
-	void close();
 	bool eof();
 	void start();
 };

@@ -25,9 +25,11 @@ list<Registro> Maestro::query(Registro& query) {
 
 	while (!archivo.eof()){
 		int valor = archivo.leer();
-		Registro registro = detalle.leer(valor - 1);
-		if(match(query,registro)){
-			result.push_back(registro);
+		if(valor > 0){
+			Registro registro = detalle.leer(valor - 1);
+			if(match(query,registro)){
+				result.push_back(registro);
+			}
 		}
 
 	}
