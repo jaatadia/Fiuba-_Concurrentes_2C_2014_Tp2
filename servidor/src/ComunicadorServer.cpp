@@ -27,7 +27,6 @@ bool ComunicadorServer::esperarRequest(){
 
 		return true;
 	}catch(string &e){
-		std::cout<<e<<std::endl;
 		return false;
 	}
 }
