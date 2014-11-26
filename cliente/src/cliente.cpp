@@ -23,10 +23,14 @@ void endInput(int signal){
 
 int main() {
 
+	try{
 	signal(SIGINT,endInput);
 
 	InterfazCliente inter;
 	cout<<START_MESSAGE<<endl;
 	while(inter.procesarEntrada());
 	cout<<END_MESSAGE<<endl;
+	} catch (string & e){
+		cout << e << endl;
+	}
 }
