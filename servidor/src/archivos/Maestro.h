@@ -24,6 +24,7 @@ public:
 	list<Registro> query(Registro &);
 	int guardar(Registro &);
 	bool match(Registro & filtro, Registro & datos);
+	string getFileName();
 };
 
 #endif /* MAESTRO_H_ */

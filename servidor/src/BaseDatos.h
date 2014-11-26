@@ -12,14 +12,14 @@
 #include <string>
 #include "Registro.h"
 #include "archivos/Maestro.h"
-
+#include "lock/LockFile.h"
 /**
  * Encapsula el funcionamiento concurrente de los archivos.
  */
 class BaseDatos {
 private:
 	Maestro datos;
-
+	LockFile lock;
 public:
 	BaseDatos(std::string path);
 	virtual ~BaseDatos();

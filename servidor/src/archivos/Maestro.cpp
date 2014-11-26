@@ -58,3 +58,7 @@ bool Maestro::match(Registro& filtro, Registro& datos) {
 	}
 	return true;
 }
+
+string Maestro::getFileName() {
+	return archivo.getPath();
+}

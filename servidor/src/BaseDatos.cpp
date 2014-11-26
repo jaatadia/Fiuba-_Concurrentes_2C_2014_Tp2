@@ -7,8 +7,7 @@
 
 #include "BaseDatos.h"
 #include "excepciones/Exception.h"
-BaseDatos::BaseDatos(std::string path): datos(path) {
-	// TODO Auto-generated constructor stub
+BaseDatos::BaseDatos(std::string path): datos(path), lock(datos.getFileName()) {
 
 }
 
@@ -22,7 +21,9 @@ std::list<Registro> BaseDatos::query(Registro & reg){
 
 bool BaseDatos::altaRegistro(Registro & reg){
 	try {
+		lock.tomarLock();
 		datos.guardar(reg);
+		lock.liberarLock();
 		return true;
 	} catch (Exception & e){
 		return false;

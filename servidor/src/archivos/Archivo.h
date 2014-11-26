@@ -25,6 +25,7 @@ public:
 	bool exists_test (const std::string& name);
 	bool eof();
 	void start();
+	const string& getPath() const;
 };
 
 #endif /* ARCHIVO_H_ */
