@@ -12,7 +12,7 @@ using namespace std;
 
 #include "Constantes.h"
 #include "ComunicadorServer.h"
-
+#include "excepciones/Exception.h"
 
 static const char* PATH_DB = "./base.db";
 int main(int argc,char argv[]) {
@@ -20,6 +20,8 @@ int main(int argc,char argv[]) {
 	cout<<START_MESSAJE<<endl;
 
 	bool child = false;
+	try {
+
 	ComunicadorServer comunicador(PATH_DB);
 	while(!child && comunicador.esperarRequest()){
 		int pid = fork();//todo verificar error
@@ -34,5 +36,11 @@ int main(int argc,char argv[]) {
 		comunicador.cerrar();
 		cout<<END_MESSAJE<<endl;
 	}
-	//TODO ! y el return?
+	} catch (string & e){
+		cout << e;
+	} catch (Exception & e) {
+		cout << e.what() << endl;
+	}
+
+	return 0;
 }
