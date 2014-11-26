@@ -6,6 +6,7 @@
  */
 
 #include "ComunicadorServer.h"
+#include <iostream>
 
 ComunicadorServer::ComunicadorServer(std::string path):base(path), tipoRequest(0), senderPID(0), contentRequest("","",""), respuestaRequest(), cola("/tmp/keyfile_cola.txt",'a') {
 	// TODO !! está bien generado respuestaRequest y tipoRequest? para el server padre no influye, o si?
@@ -16,15 +17,19 @@ ComunicadorServer::~ComunicadorServer() {
 }
 
 bool ComunicadorServer::esperarRequest(){
-	//todo cuando devuelve qué? y si falla la lectura?
-	request peticionRecibida;
-	this->cola.leer(A_SERVIDOR,&peticionRecibida);
+	try{
+		request peticionRecibida;
+		this->cola.leer(A_SERVIDOR,&peticionRecibida);
 
-	this->senderPID = peticionRecibida.senderPid;
-	this->contentRequest = Registro(peticionRecibida.nombre,peticionRecibida.direccion,peticionRecibida.telefono);
-	this->tipoRequest = peticionRecibida.tipoRequest;
+		this->senderPID = peticionRecibida.senderPid;
+		this->contentRequest = Registro(peticionRecibida.nombre,peticionRecibida.direccion,peticionRecibida.telefono);
+		this->tipoRequest = peticionRecibida.tipoRequest;
 
-	return false;
+		return true;
+	}catch(string &e){
+		std::cout<<e<<std::endl;
+		return false;
+	}
 }
 
 void ComunicadorServer::procesarRequest(){

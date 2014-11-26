@@ -24,9 +24,12 @@ void endInput(int signal){
 int main() {
 
 	signal(SIGINT,endInput);
-
-	InterfazCliente inter;
-	cout<<START_MESSAGE<<endl;
-	while(inter.procesarEntrada());
-	cout<<END_MESSAGE<<endl;
+	try{
+		InterfazCliente inter;
+		cout<<START_MESSAGE<<endl;
+		while(inter.procesarEntrada());
+		cout<<END_MESSAGE<<endl;
+	}catch(string& error){
+		cout<<error<<endl;
+	}
 }

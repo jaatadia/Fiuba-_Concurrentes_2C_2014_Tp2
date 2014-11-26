@@ -110,7 +110,7 @@ bool InterfazCliente::add(vector<string> vec){
 		if (resultado) {
 			cout<<RESULT_ADD_MESSAGE<<rec.toString()<<endl;
 		} else {
-			//TODO
+			cout<<RESULT_ADD_MESSAGE_FAIL<<rec.toString()<<endl;
 		}
 	}else{
 		cout<<INVALID_ADD_MESSAGE<<endl;
