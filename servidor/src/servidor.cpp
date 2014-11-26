@@ -6,6 +6,10 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
+
+#include <sys/types.h>
+#include <sys/wait.h>
+
 #include <iostream>
 #include <unistd.h>
 #include "signal.h"
@@ -25,6 +29,7 @@ void endInput(int signal){
 static const char* PATH_DB = "./base.db";
 int main(int argc,char* argv[]) {
 
+	int hijos=0;
 	cout<<START_MESSAJE<<endl;
 	signal(SIGINT,endInput);
 
@@ -37,10 +42,15 @@ int main(int argc,char* argv[]) {
 				child = true;
 				comunicador.procesarRequest();
 				comunicador.enviarRespuesta();
+			}else{
+				hijos++;
 			}
 		}
 
 		if(!child){
+			int status;
+			cout<<END_MESSAJE_WAITING_KIDS<<endl;
+			for (int i=0;i<hijos;i++) wait(&status);
 			comunicador.cerrar();
 			cout<<END_MESSAJE<<endl;
 		}

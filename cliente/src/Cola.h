@@ -22,6 +22,7 @@ template <class T> class Cola {
 	private:
 		key_t	clave;
 		int		id;
+		string archivo;
 
 	public:
 		Cola(const string& archivo,const char letra);
@@ -31,7 +32,7 @@ template <class T> class Cola {
 		int destruir() const; //devuelve 0 en exito, -1 en error (y tira el msj como excepción) - clientes NO deberían destruirla
 };
 
-template <class T> Cola<T>::Cola(const string& archivo,const char letra) {
+template <class T> Cola<T>::Cola(const string& arch,const char letra): archivo(arch) {
 	//si no existe el archivo temporal es porque no se inicio el servidor
 	if (FILE* fd = fopen(archivo.c_str(), "r")) {
 		fclose(fd);
@@ -69,7 +70,13 @@ template <class T> int Cola<T>::destruir() const {
 template <class T> int Cola<T>::escribir(const T& dato) const {
 	int resultado = msgsnd(this->id,static_cast<const void*>(&dato),sizeof(T)-sizeof(long),0);
 	if (resultado == -1){
-		string mensaje = string("Error en msgsnd: ") + string(strerror(errno));
+		string mensaje;
+		if (FILE* fd = fopen(archivo.c_str(), "r")) {
+			fclose(fd);
+			mensaje = string("Error en msgsnd: ") + string(strerror(errno));
+		}else{
+			mensaje = "No se pudo enviar la peticion, el servidor se encuentra bajo";
+		}
 		throw mensaje;
 	}
 	return resultado;

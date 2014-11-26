@@ -12,6 +12,7 @@
 
 static const std::string START_MESSAJE = "Comenzando el servidor";
 static const std::string END_MESSAJE = "Terminando el servidor";
+static const std::string END_MESSAJE_WAITING_KIDS = "Esperando que los hijos terminen";
 
 static const int A_SERVIDOR = 1;
 
