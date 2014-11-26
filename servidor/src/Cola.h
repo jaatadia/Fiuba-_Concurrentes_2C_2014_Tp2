@@ -33,26 +33,26 @@ template <class T> class Cola {
 //TODO !!!! revisar lo copiado!
 
 template <class T> Cola<T>::Cola(const string& archivo,const char letra) {
-	//si no existe el archivo temporal es porque no se inicio el servidor
-	if (FILE* fd = fopen(archivo.c_str(), "r")) {
-		fclose(fd);
-		this->clave = ftok(archivo.c_str(),letra);
-		if (this->clave == -1){
-			string mensaje = string("Error en ftok(): ") + string(strerror(errno));
-			throw mensaje;
-			return; //TODO !! esto funciona?
-		}
 
-		this->id = msgget(this->clave,0777|IPC_CREAT);
-		if (this->id == -1) {
-			string mensaje = string("Error en msgget: ") + string(strerror(errno));
-			throw mensaje;
-			return; //TODO !! esto funciona?
-		}
-	} else {
-	    	string mensaje = string("Error. Debe iniciar primero el servidor.");
-	    	throw mensaje;
-	 }
+	//el servidor crea el archivo
+	FILE* fd = fopen(archivo.c_str(), "r");
+	fclose(fd);
+
+	//despues crea la cola
+	this->clave = ftok(archivo.c_str(),letra);
+
+	if (this->clave == -1){
+		string mensaje = string("Error en ftok(): ") + string(strerror(errno));
+		throw mensaje;
+		return; //TODO !! esto funciona?
+	}
+
+	this->id = msgget(this->clave,0777|IPC_CREAT);
+	if (this->id == -1) {
+		string mensaje = string("Error en msgget al crear la cola: ") + string(strerror(errno));
+		throw mensaje;
+		return; //TODO !! esto funciona?
+	}
 }
 
 template <class T> Cola<T>::~Cola() {
