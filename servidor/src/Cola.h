@@ -35,7 +35,11 @@ template <class T> class Cola {
 template <class T> Cola<T>::Cola(const string& archivo,const char letra) {
 
 	//el servidor crea el archivo
-	FILE* fd = fopen(archivo.c_str(), "r");
+	FILE* fd = fopen(archivo.c_str(), "a+");
+	if (!fd) {
+		string mensaje = string("Error al crear el archivo de key para la cola: ") + string(strerror(errno));
+		throw mensaje;
+	}
 	fclose(fd);
 
 	//despues crea la cola
