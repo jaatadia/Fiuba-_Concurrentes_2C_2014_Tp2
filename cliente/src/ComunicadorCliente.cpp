@@ -33,11 +33,10 @@ std::list<Registro> ComunicadorCliente::enviarQuery(Registro reg){
 	int leido = this->cola.leer(getpid(),&respuesta);
 
 	//si la rta no tiene el tamaño del struct, fue error. tira excepcion y devuelve la lista vacía
-	if ( leido != sizeof(request) ){
+	if ( leido != (sizeof(request)-sizeof(long)) ){
 		stringstream mensaje;
-		mensaje << "Error al leer en el cliente (pid " << getpid() << ") :" << strerror(errno);
+		mensaje << "Error al leer en el cliente (pid " << getpid() << "): "<< strerror(errno);
 		throw mensaje.str();
-		return respuesta_total; //TODO !! chequear
 	}
 	//si la respuesta fue vacia, devuelvo la lista vacia
 	if (respuesta.tipoRequest == R_RESPUESTA_VACIA) return respuesta_total;
@@ -50,7 +49,7 @@ std::list<Registro> ComunicadorCliente::enviarQuery(Registro reg){
 
 		//leo siguiente respuesta
 		int leido = this->cola.leer(getpid(),&respuesta);
-		if ( leido != sizeof(request) ){
+		if ( leido != (sizeof(request)-sizeof(long)) ){
 			stringstream mensaje;
 			mensaje << "Error al leer en el cliente (pid " << getpid() << ") :" << strerror(errno);
 			throw mensaje.str();
@@ -82,11 +81,10 @@ bool ComunicadorCliente::enviarAlta(Registro reg){
 	int leido = this->cola.leer(getpid(),&respuesta);
 
 	//si la rta no tiene el tamaño del struct, fue error. tira excepcion y devuelve la lista vacía
-	if ( leido != sizeof(request) ){
+	if ( leido != (sizeof(request)-sizeof(long)) ){
 		stringstream mensaje;
 		mensaje << "Error al leer en el cliente (pid " << getpid() << ") :" << strerror(errno);
 		throw mensaje.str();
-		return false; //TODO !! chequear
 	}
 	//si la respuesta fue vacia, no se dio de alta
 	if (respuesta.tipoRequest == R_RESPUESTA_VACIA) {

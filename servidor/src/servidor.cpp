@@ -45,11 +45,11 @@ int main(int argc,char* argv[]) {
 			cout<<END_MESSAJE<<endl;
 		}
 	} catch (string & e){
-		cout << e<<endl;
+		if(!endProgram)cout << e<<endl;
 	} catch (Exception & e) {
-		cout << e.what() << endl;
+		if(!endProgram)cout << e.what() << endl;
 	} catch (...){
-		cout << "Error desconocido" <<endl;
+		if(!endProgram)cout << "Error desconocido" <<endl;
 	}
 
 	return 0;
