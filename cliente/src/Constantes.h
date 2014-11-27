@@ -37,6 +37,7 @@ static const std::string INVALID_QUERY_MESSAGE = "No se pudo procesar el pedido,
 
 static const std::string RESULT_ADD_MESSAGE = "Se dio de alta el registro: ";
 static const std::string INVALID_ADD_MESSAGE = "No se pudo procesar el pedido, los parametros son erroneos, se necesitan: "+NAME_INPUT+" "+ADR_INPUT+" "+TEL_INPUT;
+static const std::string RESULT_ADD_MESSAGE_FAIL = "No se dio de alta el registro: ";
 
 static const std::string INTEGRANTES_MESSAGE="Trabajo practico numero 2 - Tecnicas de programacion concurrentes 1 - 2ºC 2014\nIntegrantes: Alvarez Etcheverry Florencia (93408) Atadia Javier (93223) Tierno Jonatan (92713)\n";
 static const std::string HELP_MESSAGE = INTEGRANTES_MESSAGE+"Los comandos posibles son:\n"+

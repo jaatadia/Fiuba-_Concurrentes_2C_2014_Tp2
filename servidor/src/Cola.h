@@ -21,6 +21,7 @@ template <class T> class Cola {
 	private:
 		key_t	clave;
 		int		id;
+		string archivo;
 
 	public:
 		Cola(const string& archivo,const char letra);
@@ -32,7 +33,7 @@ template <class T> class Cola {
 
 //TODO !!!! revisar lo copiado!
 
-template <class T> Cola<T>::Cola(const string& archivo,const char letra) {
+template <class T> Cola<T>::Cola(const string& arch,const char letra): archivo(arch) {
 
 	//el servidor crea el archivo
 	FILE* fd = fopen(archivo.c_str(), "a+");
@@ -68,6 +69,7 @@ template <class T> int Cola<T>::destruir() const {
 		string mensaje = string("Error en msgctl al destruir la cola: ") + string(strerror(errno));
 		throw mensaje;
 	}
+	unlink(archivo.c_str());
 	return resultado;
 }
 
