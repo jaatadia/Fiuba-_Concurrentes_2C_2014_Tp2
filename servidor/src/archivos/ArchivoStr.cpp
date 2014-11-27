@@ -7,7 +7,7 @@
 
 #include "ArchivoStr.h"
 #include "../excepciones/ArchivoException.h"
-
+#include <string.h>
 ArchivoStr::ArchivoStr(const string& path):Archivo(path) {
 }
 
@@ -21,15 +21,18 @@ string ArchivoStr::leer() {
 	}
 	char longitud;
 	eof_val = fread(&longitud,1,1,file) == EOF;
-	char * buffer = new char[longitud];
+	char * buffer = new char[(int)longitud];
+	memset(buffer,0,longitud);
 	eof_val = fread(buffer, 1, longitud,file) == EOF;
-	string result(buffer);
+	string result;
+	result.append(buffer,longitud);
 	delete[] buffer;
 		if(ferror(file)){
 			throw ArchivoException(
 					"Error al leer de " + path,
 					"Error de lectura");
 		}
+
 	return result;
 
 }

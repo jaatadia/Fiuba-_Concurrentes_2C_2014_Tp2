@@ -22,7 +22,7 @@ std::list<Registro> BaseDatos::query(Registro & reg){
 bool BaseDatos::altaRegistro(Registro & reg){
 	try {
 		lock.tomarLock();
-		datos.guardar(reg);
+ 		datos.guardar(reg);
 		lock.liberarLock();
 		return true;
 	} catch (Exception & e){

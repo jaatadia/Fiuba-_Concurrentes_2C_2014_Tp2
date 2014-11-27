@@ -6,7 +6,6 @@
  */
 
 #include "Detalle.h"
-
 Detalle::Detalle(const string& path ): archivo(path+"-detalle.dat") {
 
 }

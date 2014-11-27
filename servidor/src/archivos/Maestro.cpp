@@ -6,7 +6,6 @@
  */
 
 #include "Maestro.h"
-
 /**
  * Archivo de registros de longitud fija que contiene los ids de los registros.
  */
